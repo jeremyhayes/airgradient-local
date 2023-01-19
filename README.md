@@ -7,7 +7,7 @@ Minimal web service to capture data from [Airgradient devices](https://www.airgr
 ### Docker
 ```sh
 $ docker run \
-   --name airgradient-local-prometheus \
+   --name airgradient-prometheus \
    -p 5000:5000 \
    ghcr.io/jeremyhayes/airgradient-local-prometheus:v0.0.1
 ```
@@ -18,7 +18,7 @@ version: '3.8'
 
 services:
 
-  infinitude-prometheus:
+  airgradient-prometheus:
     image: ghcr.io/jeremyhayes/airgradient-local-prometheus:v0.0.1
     ports:
       - 5000:5000
