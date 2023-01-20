@@ -8,7 +8,6 @@ Build Instructions: https://www.airgradient.com/open-airgradient/instructions/di
 Kits (including a pre-soldered version) are available: https://www.airgradient.com/open-airgradient/kits/
 
 The codes needs the following libraries installed:
-“WifiManager by tzapu, tablatronix” tested with version 2.0.11-beta
 “U8g2” by oliver tested with version 2.32.15
 
 Configuration:
@@ -25,7 +24,6 @@ MIT License
 
 
 #include <AirGradient.h>
-#include <WiFiManager.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 #include <WiFiClient.h>
@@ -39,7 +37,8 @@ U8G2_SSD1306_64X48_ER_1_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE); //for D
 // CONFIGURATION START
 
 //set to the endpoint you would like to use
-String APIROOT = "http://hw.airgradient.com/";
+// HTTPS doesn't seem to work :(
+String APIROOT = "http://airgradient.example.com";
 
 // set to true to switch from Celcius to Fahrenheit
 boolean inF = false;
@@ -49,6 +48,10 @@ boolean inUSAQI = false;
 
 // set to true if you want to connect to wifi. You have 60 seconds to connect. Then it will go into an offline mode.
 boolean connectWIFI=true;
+
+// WiFi and IP connection info.
+const char* ssid = "changeit";
+const char* password = "changeit";
 
 // CONFIGURATION END
 
@@ -202,19 +205,18 @@ void sendToServer() {
    }
 }
 
-// Wifi Manager
- void connectToWifi() {
-   WiFiManager wifiManager;
-   //WiFi.disconnect(); //to delete previous saved hotspot
-   String HOTSPOT = "AG-" + String(ESP.getChipId(), HEX);
-   updateOLED2("Connect", "Wifi", HOTSPOT);
-   delay(2000);
-   wifiManager.setTimeout(60);
-   if (!wifiManager.autoConnect((const char * ) HOTSPOT.c_str())) {
-     updateOLED2("Booting", "offline", "mode");
-     Serial.println("failed to connect and hit timeout");
-     delay(6000);
-   }
+void connectToWifi() {
+  // Set WiFi mode to client (without this it may try to act as an AP).
+  WiFi.mode(WIFI_STA);
+
+  // Setup and wait for WiFi.
+  WiFi.begin(ssid, password);
+  Serial.println("");
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    updateOLED2("Trying", "to", "connect");
+    Serial.print(".");
+  }
 }
 
 // Calculate PM2.5 US AQI
