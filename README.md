@@ -1,4 +1,4 @@
-# airgradient-local-prometheus
+# airgradient-local
 
 Minimal web service to capture data from [Airgradient devices](https://www.airgradient.com/open-airgradient/) and expose as Prometheus-formatted metrics.
 
@@ -7,9 +7,9 @@ Minimal web service to capture data from [Airgradient devices](https://www.airgr
 ### Docker
 ```sh
 $ docker run \
-   --name airgradient-prometheus \
+   --name airgradient \
    -p 5000:5000 \
-   ghcr.io/jeremyhayes/airgradient-local-prometheus:v0.0.1
+   ghcr.io/jeremyhayes/airgradient-local:v0.0.1
 ```
 
 ### Docker Compose
@@ -18,8 +18,8 @@ version: '3.8'
 
 services:
 
-  airgradient-prometheus:
-    image: ghcr.io/jeremyhayes/airgradient-local-prometheus:v0.0.1
+  airgradient:
+    image: ghcr.io/jeremyhayes/airgradient-local:v0.0.1
     ports:
       - 5000:5000
 ```
