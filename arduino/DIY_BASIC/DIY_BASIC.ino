@@ -38,7 +38,7 @@ U8G2_SSD1306_64X48_ER_1_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE); //for D
 
 //set to the endpoint you would like to use
 // HTTPS doesn't seem to work :(
-String APIROOT = "http://airgradient.example.com";
+String APIROOT = "http://airgradient.example.com/";
 
 // set to true to switch from Celcius to Fahrenheit
 boolean inF = false;
