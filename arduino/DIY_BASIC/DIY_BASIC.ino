@@ -41,7 +41,7 @@ U8G2_SSD1306_64X48_ER_1_HW_I2C u8g2(U8G2_R0, /* reset=*/ U8X8_PIN_NONE); //for D
 String APIROOT = "http://airgradient.example.com/";
 
 // set to true to switch from Celcius to Fahrenheit
-boolean inF = false;
+boolean inF = true;
 
 // PM2.5 in US AQI (default ug/m3)
 boolean inUSAQI = false;
