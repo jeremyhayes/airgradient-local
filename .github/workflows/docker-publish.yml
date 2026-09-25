@@ -35,7 +35,7 @@ jobs:
       # Setup QEMU for emulated multi-platform builds
       - name: Set up QEMU
         id: qemu
-        uses: docker/setup-qemu-action@1f40c72289eff860ee54a304f1438e3cff362e0a
+        uses: docker/setup-qemu-action@99012661954931238ded8c8b007157a8430204e1
         with:
           image: tonistiigi/binfmt:qemu-v6.0.0
           platforms: all
